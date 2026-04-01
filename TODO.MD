@@ -10,11 +10,11 @@ Cluter Zugang, Eigenständiges Arbeiten mit GPUs, Wie fange ich auf dem Cluster 
 - [ ] Review und Feinschliff
 
 ## Getting Started Guide fuer den Cluster (UV, ...) (DAVID)
-- [ ] Voraussetzungen und Accounts beschreiben
+- [X] Voraussetzungen und Accounts beschreiben
 - [ ] Zugriff/SSH und erste Kommandos
 - [ ] UV-Setup und Beispielprojekt
 - [ ] SLURM-Minimaljob und Monitoring
-- [ ] VPN Einrichten
+- [X] VPN Einrichten
 - [ ] FAQ und Troubleshooting
 
 ## Beispiel-Repo: Python-Training + SLURM-Skripte (schrittweise komplexer) (Felix, David)
