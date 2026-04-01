@@ -11,11 +11,15 @@ Cluter Zugang, Eigenständiges Arbeiten mit GPUs, Wie fange ich auf dem Cluster 
 
 ## Getting Started Guide fuer den Cluster (UV, ...) (DAVID)
 - [X] Voraussetzungen und Accounts beschreiben
-- [ ] Zugriff/SSH und erste Kommandos
+- [X] Zugriff/SSH und erste Kommandos
+- [ ] cpu-bash script aufsetzen, dass die wichtigsten Sachen für die Nutzer installiert: uv, python, ...
+- At the end I should make a clean state so we can use my test account d.goll during the workshop
 - [ ] UV-Setup und Beispielprojekt
 - [ ] SLURM-Minimaljob und Monitoring
 - [X] VPN Einrichten
 - [ ] FAQ und Troubleshooting
+
+## Felix tests Windows setup
 
 ## Beispiel-Repo: Python-Training + SLURM-Skripte (schrittweise komplexer) (Felix, David)
 - [ ] Repo-Struktur und Namensschema festlegen
@@ -33,5 +37,8 @@ Cluter Zugang, Eigenständiges Arbeiten mit GPUs, Wie fange ich auf dem Cluster 
 
 ## Interaktives SLURM-Repo
 - [ ] Doku fuer Trainer und Teilnehmende
+
+## Block GPUs for the workshop (Felix)
+- [ ] Ask Mathias to block GPUs for the workshop time (probably Friday 17.04. 15-18:00)
 
 
