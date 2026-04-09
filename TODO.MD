@@ -40,5 +40,3 @@ Cluter Zugang, Eigenständiges Arbeiten mit GPUs, Wie fange ich auf dem Cluster 
 
 ## Block GPUs for the workshop (Felix)
 - [ ] Ask Mathias to block GPUs for the workshop time (probably Friday 17.04. 15-18:00)
-
-
