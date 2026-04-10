@@ -5,7 +5,8 @@ requires-python = ">=3.10"
 dependencies = [
     "torch",
     "torchvision",
+    "accelerate",
 ]
 
 [tool.uv]
-index-url = "https://download.pytorch.org/whl/cu128"
+extra-index-url = ["https://download.pytorch.org/whl/cu128"]

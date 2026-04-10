@@ -32,6 +32,7 @@ else
 fi
 
 # Install project dependencies from pyproject.toml
+# TODO: Add Explanation what uv sync does and how it installs a .venv throughout all compute nodes in the cluster
 echo "Installing dependencies..."
 uv sync
 

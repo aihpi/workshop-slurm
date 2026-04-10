@@ -14,7 +14,7 @@ Cluter Zugang, Eigenständiges Arbeiten mit GPUs, Wie fange ich auf dem Cluster 
 - [X] Voraussetzungen und Accounts beschreiben
 - [X] Zugriff/SSH und erste Kommandos
 - [X] SLURM-Minimaljob
-- [ ] UV-Setup und Beispielprojekt
+- [X] UV-Setup und Beispielprojekt
 - [ ] FAQ und Troubleshooting in Readme hinzufügen
 
 ## Felix tests Windows setup
