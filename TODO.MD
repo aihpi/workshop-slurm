@@ -6,8 +6,8 @@ Cluter Zugang, Eigenständiges Arbeiten mit GPUs, Wie fange ich auf dem Cluster 
 - [X] Outline und Gliederung festlegen
 - [X] Folien zu Batch Jobs, Queues, Partitions, Ressourcen und Best Practices erstellen. 
 - [X] Interactive vs Batch Jobs erklären.
-- [ ] CPUs/GPUs slides
-- [ ] Fairshare erklären.
+- [X] CPUs/GPUs slides
+- [X] Fairshare erklären.
 - [ ] Review und Feinschliff
 
 ## Getting Started Guide fuer den Cluster (David)
@@ -17,7 +17,7 @@ Cluter Zugang, Eigenständiges Arbeiten mit GPUs, Wie fange ich auf dem Cluster 
 - [X] UV-Setup und Beispielprojekt
 - [ ] FAQ und Troubleshooting in Readme hinzufügen
 
-## Felix tests Windows setup
+## Felix tests Windows setup [X]
 
 ## Beispiel-Repo: Python-Training + SLURM-Skripte (schrittweise komplexer) (David)
 - [X] Repo-Struktur und Namensschema festlegen
