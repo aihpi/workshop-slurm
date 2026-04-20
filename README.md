@@ -19,7 +19,7 @@ This repository contains materials for the **2-hour HPC Cluster Workshop** by th
 | **II** | Slides: Basics of CPUs/GPUs and fairshare | 10-20 min |
 | **II** | Cloning of repository | 10-20 min |
 | **II** | UV installation & Python environment setup (`02_setup_uv`) | 10 min |
-| **II** | Batch scripts: from hello world to multi-GPU training (`01`-`07`) | 20 min |
+| **II** | Batch scripts: from hello world to multi-GPU training (`01`-`08`) | 20 min |
 | **II** | Homework: Write your own sbatch script | - |
 
 ## Getting Started
@@ -80,12 +80,13 @@ The `scripts/` directory contains a progressive series of SLURM batch scripts (`
 | `01_hello_world` | Basic SLURM job submission and logging | `sbatch scripts/01_hello_world.sh` |
 | `02_setup_uv` | Install UV and Python dependencies. For more information on UV, please read the [UV docs](https://docs.astral.sh/uv/) | `sbatch scripts/02_setup_uv.sh` |
 | `03_gpu_basic` | Verify GPU allocation with `nvidia-smi` | `sbatch scripts/03_gpu_basic.sh` |
-| `04_python_training` | Train a simple CNN on MNIST (single GPU) | `sbatch scripts/04_python_training.sh` |
-| `05_array_jobs` | Hyperparameter sweep with SLURM array jobs | `sbatch scripts/05_array_jobs.sh` |
-| `06_single_gpu` | Train ResNet-18 on CIFAR-100 (single GPU) | `sbatch scripts/06_single_gpu.sh` |
-| `07_multi_gpu` | Train ResNet-18 on CIFAR-100 (4 GPUs with Accelerate) | `sbatch scripts/07_multi_gpu.sh` |
+| `04_data_setup` | Download datasets to shared project storage | `sbatch scripts/04_data_setup.sh` |
+| `05_python_training` | Train a simple CNN on MNIST (single GPU) | `sbatch scripts/05_python_training.sh` |
+| `06_array_jobs` | Hyperparameter sweep with SLURM array jobs | `sbatch scripts/06_array_jobs.sh` |
+| `07_single_gpu` | Train ResNet-18 on CIFAR-100 (single GPU) | `sbatch scripts/07_single_gpu.sh` |
+| `08_multi_gpu` | Train ResNet-18 on CIFAR-100 (4 GPUs with Accelerate) | `sbatch scripts/08_multi_gpu.sh` |
 
-Scripts `01`-`05` use MNIST with a small CNN for fast iteration. Scripts `06`-`07` switch to CIFAR-100 with ResNet-18 — a larger model and dataset that makes the multi-GPU speedup clearly visible.
+Scripts `05`-`06` use MNIST with a small CNN for fast iteration. Scripts `07`-`08` switch to CIFAR-100 with ResNet-18 — a larger model and dataset that makes the multi-GPU speedup clearly visible.
 
 ## References
 

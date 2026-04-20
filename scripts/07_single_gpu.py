@@ -5,9 +5,7 @@ This script uses a ResNet-18 model (~11M parameters) on CIFAR-100 (100 classes).
 ResNet-18 is much larger than our SimpleCNN, so training takes longer per epoch —
 this will help us see whether multi-GPU training provides a real speedup.
 
-The dataset is stored in the shared project storage at /sc/projects/sci-aisc/workshop-slurm/data/
-instead of the home folder. On the cluster, home folders have limited space —
-large datasets and model checkpoints should always go to /sc/projects/sci-aisc/.
+The dataset is stored in shared project storage (see 04_data_setup.sh for details).
 """
 
 import time
@@ -23,7 +21,7 @@ LEARNING_RATE = 0.01
 EPOCHS = 5
 
 # --- Shared project storage ---
-# Store data here instead of your home folder!
+# Data was downloaded by 04_data_setup.sh to shared storage (see that script for details).
 DATA_DIR = "/sc/projects/sci-aisc/workshop-slurm/data"
 
 # --- Device setup ---
@@ -39,7 +37,7 @@ model.fc = nn.Linear(model.fc.in_features, 100)
 
 
 # --- Data loading ---
-train_dataset = datasets.CIFAR100(DATA_DIR, train=True, download=True, transform=transforms.ToTensor())
+train_dataset = datasets.CIFAR100(DATA_DIR, train=True, download=False, transform=transforms.ToTensor())
 test_dataset = datasets.CIFAR100(DATA_DIR, train=False, transform=transforms.ToTensor())
 
 # Compute mean and std per channel from the training data

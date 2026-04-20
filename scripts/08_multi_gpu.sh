@@ -2,31 +2,32 @@
 #SBATCH --account=aisc
 #SBATCH --partition=aisc-batch
 #SBATCH --time=00:15:00
-#SBATCH --mem=16G
-#SBATCH --cpus-per-task=4
-#SBATCH --gpus=1
-#SBATCH --job-name=cifar100_single
-#SBATCH --output=logs/06_single_%j.log
-#SBATCH --error=logs/06_single_%j.err
+#SBATCH --mem=32G
+#SBATCH --cpus-per-task=8
+#SBATCH --gpus=4
+#SBATCH --job-name=cifar100_multi
+#SBATCH --output=logs/08_multi_%j.log
+#SBATCH --error=logs/08_multi_%j.err
 
 # ========================================
-# Usage: sbatch scripts/06_single_gpu.sh
+# Usage: sbatch scripts/08_multi_gpu.sh
 # Check status: squeue --me
-# View output: cat logs/06_single_<job_id>.log
-# View errors: cat logs/06_single_<job_id>.err
+# View output: cat logs/08_multi_<job_id>.log
+# View errors: cat logs/08_multi_<job_id>.err
 # ========================================
 
-# Note: We store the dataset in the shared project storage, not in your home folder.
-# Home folders have limited space — large datasets should go to /sc/projects/sci-aisc/.
+# Note: We use "accelerate launch" instead of "python" to distribute
+# the training across all allocated GPUs automatically.
 
 echo "========================================"
 echo "SLURM Job ID: $SLURM_JOB_ID"
 echo "Running on node: $(hostname)"
+echo "GPUs allocated: $SLURM_GPUS"
 echo "Start time: $(date)"
 echo "========================================"
 echo ""
 
-uv run python scripts/06_single_gpu.py
+uv run accelerate launch --num_processes=4 scripts/08_multi_gpu.py
 
 echo ""
 echo "========================================"

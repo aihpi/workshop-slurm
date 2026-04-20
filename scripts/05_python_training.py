@@ -5,7 +5,7 @@ This script trains a small CNN (Convolutional Neural Network) on the MNIST
 handwritten digit dataset (0-9). It automatically uses the GPU if available,
 otherwise falls back to CPU.
 
-The MNIST dataset is downloaded automatically on first run to ./data/.
+The MNIST dataset is stored in shared project storage (see 04_data_setup.sh).
 """
 
 import torch
@@ -49,10 +49,13 @@ class SimpleCNN(nn.Module):
         return x
 
 
+# --- Shared project storage ---
+# Data was downloaded by 04_data_setup.sh to shared storage (see that script for details).
+DATA_DIR = "/sc/projects/sci-aisc/workshop-slurm/data"
+
 # --- Data loading ---
-# Download MNIST to ./data/ (only on first run, cached afterwards)
-train_dataset = datasets.MNIST("./data", train=True, download=True, transform=transforms.ToTensor())
-test_dataset = datasets.MNIST("./data", train=False, transform=transforms.ToTensor())
+train_dataset = datasets.MNIST(DATA_DIR, train=True, download=False, transform=transforms.ToTensor())
+test_dataset = datasets.MNIST(DATA_DIR, train=False, transform=transforms.ToTensor())
 
 # Compute mean and std from the training data for normalization
 all_images = torch.stack([img for img, _ in train_dataset])

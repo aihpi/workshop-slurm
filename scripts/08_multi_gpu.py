@@ -1,7 +1,7 @@
 """
 CIFAR-100 training with ResNet-18 using multiple GPUs via Hugging Face Accelerate.
 
-Compare this with 06_single_gpu.py — the training logic is almost identical,
+Compare this with 07_single_gpu.py — the training logic is almost identical,
 but Accelerate handles distributing the model and data across multiple GPUs.
 
 Key differences from the single-GPU version:
@@ -10,14 +10,13 @@ Key differences from the single-GPU version:
   - We use accelerator.print() so only one GPU prints output
   - Everything else stays the same!
 
-Changes from 06_single_gpu.py at a glance (search for "← NEW" and "← CHANGED"):
+Changes from 07_single_gpu.py at a glance (search for "← NEW" and "← CHANGED"):
   1. Import and initialize Accelerator
   2. print() → accelerator.print() (only main GPU prints)
-  3. download=True → download=accelerator.is_main_process (only main GPU downloads)
-  4. model.to(device) → accelerator.prepare() (handles device placement + data splitting)
-  5. loss.backward() → accelerator.backward(loss) (syncs gradients across GPUs)
+  3. model.to(device) → accelerator.prepare() (handles device placement + data splitting)
+  4. loss.backward() → accelerator.backward(loss) (syncs gradients across GPUs)
 
-Run with: sbatch scripts/07_multi_gpu.sh
+Run with: sbatch scripts/08_multi_gpu.sh
 """
 
 import time
@@ -38,6 +37,7 @@ LEARNING_RATE = 0.01
 EPOCHS = 5
 
 # --- Shared project storage ---
+# Data was downloaded by 04_data_setup.sh to shared storage (see that script for details).
 DATA_DIR = "/sc/projects/sci-aisc/workshop-slurm/data"
 
 accelerator.print(f"Number of GPUs: {accelerator.num_processes}")  # ← CHANGED: was print()
@@ -49,7 +49,7 @@ model.fc = nn.Linear(model.fc.in_features, 100)
 
 # --- Data loading ---
 train_dataset = datasets.CIFAR100(DATA_DIR, train=True,
-                                  download=accelerator.is_main_process,  # ← CHANGED: was download=True
+                                  download=False,
                                   transform=transforms.ToTensor())
 test_dataset = datasets.CIFAR100(DATA_DIR, train=False, transform=transforms.ToTensor())
 

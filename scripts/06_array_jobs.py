@@ -1,7 +1,7 @@
 """
 MNIST training with SLURM array jobs for hyperparameter sweeps.
 
-This script is the same training as 04_python_training.py, but designed to run
+This script is the same training as 05_python_training.py, but designed to run
 multiple times in parallel with different hyperparameters. Each SLURM array task
 gets a different combination of learning rate and batch size via --task-id.
 
@@ -43,7 +43,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
 
-# --- Model (same as 04_python_training.py) ---
+# --- Model (same as 05_python_training.py) ---
 class SimpleCNN(nn.Module):
     def __init__(self):
         super().__init__()
@@ -63,9 +63,13 @@ class SimpleCNN(nn.Module):
         return x
 
 
+# --- Shared project storage ---
+# Data was downloaded by 04_data_setup.sh to shared storage (see that script for details).
+DATA_DIR = "/sc/projects/sci-aisc/workshop-slurm/data"
+
 # --- Data loading ---
-train_dataset = datasets.MNIST("./data", train=True, download=True, transform=transforms.ToTensor())
-test_dataset = datasets.MNIST("./data", train=False, transform=transforms.ToTensor())
+train_dataset = datasets.MNIST(DATA_DIR, train=True, download=False, transform=transforms.ToTensor())
+test_dataset = datasets.MNIST(DATA_DIR, train=False, transform=transforms.ToTensor())
 
 # Compute mean and std from the training data for normalization
 all_images = torch.stack([img for img, _ in train_dataset])

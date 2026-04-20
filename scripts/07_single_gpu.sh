@@ -1,19 +1,19 @@
 #!/bin/bash
 #SBATCH --account=aisc
 #SBATCH --partition=aisc-batch
-#SBATCH --time=00:10:00
-#SBATCH --mem=8G
+#SBATCH --time=00:15:00
+#SBATCH --mem=16G
 #SBATCH --cpus-per-task=4
 #SBATCH --gpus=1
-#SBATCH --job-name=mnist_training
-#SBATCH --output=logs/04_mnist_%j.log
-#SBATCH --error=logs/04_mnist_%j.err
+#SBATCH --job-name=cifar100_single
+#SBATCH --output=logs/07_single_%j.log
+#SBATCH --error=logs/07_single_%j.err
 
 # ========================================
-# Usage: sbatch scripts/04_python_training.sh
+# Usage: sbatch scripts/07_single_gpu.sh
 # Check status: squeue --me
-# View output: cat logs/04_mnist_<job_id>.log
-# View errors: cat logs/04_mnist_<job_id>.err
+# View output: cat logs/07_single_<job_id>.log
+# View errors: cat logs/07_single_<job_id>.err
 # ========================================
 
 echo "========================================"
@@ -23,10 +23,7 @@ echo "Start time: $(date)"
 echo "========================================"
 echo ""
 
-
-echo "=== Starting training ==="
-uv run python scripts/04_python_training.py
-
+uv run python scripts/07_single_gpu.py
 
 echo ""
 echo "========================================"

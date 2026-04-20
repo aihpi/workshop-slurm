@@ -5,20 +5,16 @@
 #SBATCH --mem=8G
 #SBATCH --cpus-per-task=4
 #SBATCH --gpus=1
-#SBATCH --job-name=mnist_sweep
-#SBATCH --output=logs/05_sweep_%A_%a.log
-#SBATCH --error=logs/05_sweep_%A_%a.err
-#SBATCH --array=0-3
+#SBATCH --job-name=mnist_training
+#SBATCH --output=logs/05_mnist_%j.log
+#SBATCH --error=logs/05_mnist_%j.err
 
 # ========================================
-# Usage: sbatch scripts/05_array_jobs.sh
+# Usage: sbatch scripts/05_python_training.sh
 # Check status: squeue --me
-# View output: cat logs/05_sweep_<array_job_id>_<task_id>.log
-# View errors: cat logs/05_sweep_<array_job_id>_<task_id>.err
+# View output: cat logs/05_mnist_<job_id>.log
+# View errors: cat logs/05_mnist_<job_id>.err
 # ========================================
-
-# --array=0-3 launches 4 jobs with SLURM_ARRAY_TASK_ID = 0, 1, 2, 3
-# In the output filenames: %A = array job ID, %a = array task ID
 
 echo "========================================"
 echo "SLURM Job ID: $SLURM_JOB_ID"
@@ -28,10 +24,8 @@ echo "========================================"
 echo ""
 
 
-echo "Array Job ID: $SLURM_ARRAY_JOB_ID"
-echo "Array Task ID: $SLURM_ARRAY_TASK_ID"
-
-uv run python scripts/05_array_jobs.py --task-id $SLURM_ARRAY_TASK_ID
+echo "=== Starting training ==="
+uv run python scripts/05_python_training.py
 
 
 echo ""
