@@ -117,9 +117,7 @@ For general cluster issues, see the [Scientific Compute FAQ](https://docs.sc.hpi
 
 | Problem | Likely Cause | Fix |
 |---------|-------------|-----|
-| Job stuck in PENDING | Partition full or wrong `--account` | Check with `squeue --me`; verify `--account=aisc` and `--partition=aisc-batch` |
-| `CUDA not available` | Missing GPU allocation | Add `--gpus=1` to your sbatch script |
-| `ModuleNotFoundError` | Python environment not set up | Run `uv sync` first; use `uv run python` instead of `python` |
+ToDo: Add troubleshooting section
 
 ## References
 
