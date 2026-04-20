@@ -1,9 +1,10 @@
 #!/bin/bash
+#SBATCH --job-name=hello_world
 #SBATCH --account=aisc
 #SBATCH --partition=aisc-batch
 #SBATCH --time=00:01:00
 #SBATCH --mem=1G
-#SBATCH --job-name=hello_world
+#SBATCH --exclude=ga03 # Exclude ARM node (ga03)
 #SBATCH --output=logs/01_hello_%j.log
 #SBATCH --error=logs/01_hello_%j.err
 

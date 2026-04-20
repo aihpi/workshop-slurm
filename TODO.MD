@@ -8,6 +8,7 @@ Cluter Zugang, Eigenständiges Arbeiten mit GPUs, Wie fange ich auf dem Cluster 
 - [X] Interactive vs Batch Jobs erklären.
 - [X] CPUs/GPUs slides
 - [X] Fairshare erklären.
+- [ ] Rework Table in README with realistic time slots and actual steps
 - [ ] Review und Feinschliff
 
 ## Getting Started Guide fuer den Cluster (David)
@@ -15,19 +16,17 @@ Cluter Zugang, Eigenständiges Arbeiten mit GPUs, Wie fange ich auf dem Cluster 
 - [X] Zugriff/SSH und erste Kommandos
 - [X] SLURM-Minimaljob
 - [X] UV-Setup und Beispielprojekt
-- [ ] FAQ und Troubleshooting in Readme hinzufügen
+- [X] FAQ und Troubleshooting in Readme hinzufügen
 
 ## Felix tests Windows setup [X]
 
 ## Beispiel-Repo: Python-Training + SLURM-Skripte (schrittweise komplexer) (David)
 - [X] Repo-Struktur und Namensschema festlegen
-- [ ] Minimalbeispiel: einzelner Job, CPU-only
-- [ ] Naechste Stufe: Parameter, Logging
-- [ ] Naechste Stufe: Multi/Single GPU-Jobs, Ressourcen-Requests
-- [ ] Naechste Stufe: Array-Jobs, Hyperparameter-Sweeps, Model Checkpoints
-- [ ] Doku und README mit Ausfuehrungsanleitung
+- [X] Minimalbeispiel: einzelner Job
+- [X] Naechste Stufe: Array-Jobs
+- [X] Naechste Stufe: Multi GPU-Jobs
 
-## Gemeinsame Markdown-Datei fuer Teilnehmende (?)
+## Gemeinsame Markdown-Datei fuer Teilnehmende (Handout) (?)
 - [ ] Template und Inhalte definieren (Agenda, Links, Uebungen)
 - [ ] Schreibrechte/Ort festlegen
 - [ ] Beispiele und Code-Snippets einfuegen

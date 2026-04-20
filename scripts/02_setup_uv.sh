@@ -1,9 +1,10 @@
 #!/bin/bash
+#SBATCH --job-name=setup_uv
 #SBATCH --account=aisc
 #SBATCH --partition=aisc-batch
 #SBATCH --time=00:10:00
 #SBATCH --mem=4G
-#SBATCH --job-name=setup_uv
+#SBATCH --exclude=ga03 # Exclude ARM node (ga03)
 #SBATCH --output=logs/02_setup_uv_%j.log
 #SBATCH --error=logs/02_setup_uv_%j.err
 

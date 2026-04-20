@@ -1,9 +1,10 @@
 #!/bin/bash
+#SBATCH --job-name=data_setup
 #SBATCH --account=aisc
 #SBATCH --partition=aisc-batch
 #SBATCH --time=00:10:00
 #SBATCH --mem=4G
-#SBATCH --job-name=data_setup
+#SBATCH --exclude=ga03 # Exclude ARM node (ga03)
 #SBATCH --output=logs/04_data_%j.log
 #SBATCH --error=logs/04_data_%j.err
 
@@ -39,10 +40,10 @@
 #   chmod 770 /sc/projects/sci-aisc/my-project         # Owner + group: full access, others: none
 #
 # The "770" means:
-#   7 (owner)  = read + write + execute
-#   7 (group)  = read + write + execute
-#   0 (others) = no access
-#
+#   7 (owner)  = read (4) + write (2) + execute (1)
+#   7 (group)  = read (4) + write (2) + execute (1)
+#   0 (others) = no access (0)
+# (none - 0, execute - 1, write - 2, read - 4; add them up for combinations)
 #
 # Symlinks
 # --------

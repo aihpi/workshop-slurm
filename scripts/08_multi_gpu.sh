@@ -1,11 +1,12 @@
 #!/bin/bash
+#SBATCH --job-name=cifar100_multi
 #SBATCH --account=aisc
 #SBATCH --partition=aisc-batch
 #SBATCH --time=00:15:00
 #SBATCH --mem=32G
+#SBATCH --exclude=ga03 # Exclude ARM node (ga03)
 #SBATCH --cpus-per-task=8
 #SBATCH --gpus=4
-#SBATCH --job-name=cifar100_multi
 #SBATCH --output=logs/08_multi_%j.log
 #SBATCH --error=logs/08_multi_%j.err
 

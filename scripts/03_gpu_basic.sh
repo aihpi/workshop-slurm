@@ -1,9 +1,10 @@
 #!/bin/bash
+#SBATCH --job-name=gpu_basic
 #SBATCH --account=aisc
 #SBATCH --partition=aisc-batch
 #SBATCH --time=00:05:00
 #SBATCH --mem=4G
-#SBATCH --job-name=gpu_basic
+#SBATCH --exclude=ga03,gx17v1 # Only use H100 GPUs (gx[07-13]). Exclude ARM node (ga03) and A30 GPU node (gx17v1)
 #SBATCH --output=logs/03_gpu_basic_%j.log
 #SBATCH --error=logs/03_gpu_basic_%j.err
 #SBATCH --gpus=1
