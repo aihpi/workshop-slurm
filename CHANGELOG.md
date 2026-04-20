@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Added
+- Interactive SLURM workflow documentation in README with install/usage instructions for [tool-interactive-slurm](https://github.com/aihpi/tool-interactive-slurm)
+- `--exclude=ga03` to all scripts (ARM node, incompatible with uv binary)
+- `--exclude=gx17v1` to `03_gpu_basic` (restrict to H100 GPU nodes)
+
+### Changed
+- Reworked workshop structure table with updated time slots and topics
+- Moved `--job-name` to top of SBATCH directives for consistency across all scripts
+
+### Fixed
+- Changed `data/` to `data` in `.gitignore` to also match the symlink
+
 ## [0.3.0] - 2026-04-20
 
 ### Added

@@ -9,18 +9,16 @@ This repository contains materials for the **2-hour HPC Cluster Workshop** by th
 
 | Part | Topic | Duration |
 |------|-------|----------|
-| **I** | Introduction: What is a cluster? What is the AISC cluster? | 5 min |
-| **I** | Interactive: Cluster access setup | 20-30 min |
-| **I** | SLURM basics: partitions, GPUs/CPUs, accounts, fairshare | 10 min |
-| **I** | Rules and best practices | 5 min |
-| **I** | VSCode Installation | 5 min |
+| **I** | Introduction and Motivation | 10 min |
+| **I** | Interactive: Cluster access setup | 20 min |
+| **I** | Slides: partitions, nodes, SLURM, Interactive vs. Batch | 10 min |
+| **I** | Interactive: VSCode Installation | 5 min |
 | | *Break* | |
 | **II** | Interactive SLURM workflow | 10-20 min |
 | **II** | Slides: Basics of CPUs/GPUs and fairshare | 10-20 min |
-| **II** | Cloning of repository | 10-20 min |
-| **II** | UV installation & Python environment setup (`02_setup_uv`) | 10 min |
-| **II** | Batch scripts: from hello world to multi-GPU training (`01`-`08`) | 20 min |
-| **II** | Homework: Write your own sbatch script | - |
+| **II** | Interactive: Cloning of repository | 5 min |
+| **II** | Interactive: Batch scripts (`01`-`08`) | 20 min |
+| **II** | Conclusion and Feedback | 5 min |
 
 ## Getting Started
 
