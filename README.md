@@ -72,10 +72,28 @@ When you log in via `ssh user.name@hpc.sci.hpi.de` you are connected with one of
 7. After your session is finished, click on the blue button in the bottom left and `Close Remote Connection`
 
 
-## Interactive SLURM workflow
+## Interactive SLURM Workflow
 
-- ToDo: Add brief instructions on how to install interactive tool and how to use it.
-- For more details, please take a look at https://github.com/aihpi/tool-interactive-slurm
+We provide a tool for interactive SSH sessions on SLURM compute nodes, with VSCode Remote-SSH integration. For full documentation, see [tool-interactive-slurm](https://github.com/aihpi/tool-interactive-slurm).
+
+**Installation** (run on your local machine):
+```bash
+git clone https://github.com/aihpi/tool-interactive-slurm.git
+cd tool-interactive-slurm
+./setup.sh          # macOS/Linux
+# .\setup.ps1       # Windows (PowerShell)
+```
+
+The setup script generates SSH keys, installs scripts on the cluster, and configures VSCode integration.
+
+**Usage:**
+
+| Command | Purpose |
+|---------|---------|
+| `ssh slurm-cpu` | Connect to a CPU compute node |
+| `remote list` | Display running jobs |
+| `remote h100 [count]` | Reserve H100 GPUs (1-8) |
+| `remote exit` | Terminate all interactive sessions |
 
 
 ## SBATCH Scripts

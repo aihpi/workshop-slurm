@@ -1,6 +1,7 @@
 # Workshop runtime artifacts
 logs/
 data/
+data
 .venv/
 
 # macOS
