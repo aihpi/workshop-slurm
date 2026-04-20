@@ -18,9 +18,9 @@ This repository contains materials for the **2-hour HPC Cluster Workshop** by th
 | **II** | Interactive SLURM workflow | 10-20 min |
 | **II** | Slides: Basics of CPUs/GPUs and fairshare | 10-20 min |
 | **II** | Cloning of repository | 10-20 min |
-| **II** | UV installation & Python environment setup | 10 min |
-| **II** | Batch scripts: simple to complex (see `scripts/`) | 20 min |
-| **II** | Homework: Write your own sbatch script for MNIST training | - |
+| **II** | UV installation & Python environment setup (`02_setup_uv`) | 10 min |
+| **II** | Batch scripts: from hello world to multi-GPU training (`01`-`07`) | 20 min |
+| **II** | Homework: Write your own sbatch script | - |
 
 ## Getting Started
 
@@ -69,7 +69,23 @@ When you log in via `ssh user.name@hpc.sci.hpi.de` you are connected with one of
 
 <img src="00_aisc/img/Screenshot2.png" alt="Alt text" width="200">
 
-7. After your session is finished, click on the blue bottom in the bottom left and `Close Remote Connection`
+7. After your session is finished, click on the blue button in the bottom left and `Close Remote Connection`
+
+## Scripts
+
+The `scripts/` directory contains a progressive series of SLURM batch scripts (`.sh`) and their corresponding Python scripts (`.py`). Each builds on the concepts from the previous one.
+
+| Script | Topic | Command |
+|--------|-------|---------|
+| `01_hello_world` | Basic SLURM job submission and logging | `sbatch scripts/01_hello_world.sh` |
+| `02_setup_uv` | Install UV and Python dependencies. For more information on UV, please read the [UV docs](https://docs.astral.sh/uv/) | `sbatch scripts/02_setup_uv.sh` |
+| `03_gpu_basic` | Verify GPU allocation with `nvidia-smi` | `sbatch scripts/03_gpu_basic.sh` |
+| `04_python_training` | Train a simple CNN on MNIST (single GPU) | `sbatch scripts/04_python_training.sh` |
+| `05_array_jobs` | Hyperparameter sweep with SLURM array jobs | `sbatch scripts/05_array_jobs.sh` |
+| `06_single_gpu` | Train ResNet-18 on CIFAR-100 (single GPU) | `sbatch scripts/06_single_gpu.sh` |
+| `07_multi_gpu` | Train ResNet-18 on CIFAR-100 (4 GPUs with Accelerate) | `sbatch scripts/07_multi_gpu.sh` |
+
+Scripts `01`-`05` use MNIST with a small CNN for fast iteration. Scripts `06`-`07` switch to CIFAR-100 with ResNet-18 — a larger model and dataset that makes the multi-GPU speedup clearly visible.
 
 ## References
 

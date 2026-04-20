@@ -10,7 +10,14 @@ Key differences from the single-GPU version:
   - We use accelerator.print() so only one GPU prints output
   - Everything else stays the same!
 
-Run with: sbatch scripts/06_multi_gpu.sh
+Changes from 06_single_gpu.py at a glance (search for "← NEW" and "← CHANGED"):
+  1. Import and initialize Accelerator
+  2. print() → accelerator.print() (only main GPU prints)
+  3. download=True → download=accelerator.is_main_process (only main GPU downloads)
+  4. model.to(device) → accelerator.prepare() (handles device placement + data splitting)
+  5. loss.backward() → accelerator.backward(loss) (syncs gradients across GPUs)
+
+Run with: sbatch scripts/07_multi_gpu.sh
 """
 
 import time
@@ -19,11 +26,11 @@ import torch.nn as nn
 import torch.optim as optim
 from torchvision import datasets, transforms, models
 from torch.utils.data import DataLoader
-from accelerate import Accelerator
+from accelerate import Accelerator                          # ← NEW: import Accelerate
 
 # --- Initialize Accelerate ---
 # This automatically detects how many GPUs are available and sets up distribution.
-accelerator = Accelerator()
+accelerator = Accelerator()                                  # ← NEW: auto-detects GPUs
 
 # --- Hyperparameters ---
 BATCH_SIZE = 128
@@ -33,15 +40,16 @@ EPOCHS = 5
 # --- Shared project storage ---
 DATA_DIR = "/sc/projects/sci-aisc/workshop-slurm/data"
 
-accelerator.print(f"Number of GPUs: {accelerator.num_processes}")
-accelerator.print(f"Current GPU: {accelerator.device}")
+accelerator.print(f"Number of GPUs: {accelerator.num_processes}")  # ← CHANGED: was print()
+accelerator.print(f"Current GPU: {accelerator.device}")          # ← CHANGED: was print()
 
 # --- ResNet-18 for CIFAR-100 ---
 model = models.resnet18(weights=None)
 model.fc = nn.Linear(model.fc.in_features, 100)
 
 # --- Data loading ---
-train_dataset = datasets.CIFAR100(DATA_DIR, train=True, download=accelerator.is_main_process,
+train_dataset = datasets.CIFAR100(DATA_DIR, train=True,
+                                  download=accelerator.is_main_process,  # ← CHANGED: was download=True
                                   transform=transforms.ToTensor())
 test_dataset = datasets.CIFAR100(DATA_DIR, train=False, transform=transforms.ToTensor())
 
@@ -49,7 +57,7 @@ test_dataset = datasets.CIFAR100(DATA_DIR, train=False, transform=transforms.ToT
 all_images = torch.stack([img for img, _ in train_dataset])
 mean = all_images.mean(dim=(0, 2, 3))
 std = all_images.std(dim=(0, 2, 3))
-accelerator.print(f"CIFAR-100 mean: {mean}, std: {std}")
+accelerator.print(f"CIFAR-100 mean: {mean}, std: {std}")       # ← CHANGED: was print()
 
 transform = transforms.Compose([
     transforms.Resize(224),
@@ -62,11 +70,11 @@ test_dataset.transform = transform
 train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=2)
 test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=2)
 
-# --- Prepare for distributed training ---
+# ← CHANGED: replaces "model = model.to(device)" from single-GPU version.
 # accelerator.prepare() wraps model, optimizer, and data loaders so they work across GPUs.
-# Each GPU gets a slice of each batch automatically.
+# Each GPU gets a slice of each batch automatically — no manual .to(device) needed.
 optimizer = optim.SGD(model.parameters(), lr=LEARNING_RATE)
-model, optimizer, train_loader, test_loader = accelerator.prepare(
+model, optimizer, train_loader, test_loader = accelerator.prepare(  # ← NEW
     model, optimizer, train_loader, test_loader
 )
 criterion = nn.CrossEntropyLoss()
@@ -79,11 +87,11 @@ for epoch in range(EPOCHS):
     total = 0
     epoch_start = time.time()
 
-    for data, target in train_loader:
+    for data, target in train_loader:                          # no .to(device) needed!
         optimizer.zero_grad()
         output = model(data)
         loss = criterion(output, target)
-        accelerator.backward(loss)
+        accelerator.backward(loss)                            # ← CHANGED: was loss.backward()
         optimizer.step()
 
         running_loss += loss.item()
@@ -92,7 +100,7 @@ for epoch in range(EPOCHS):
         correct += predicted.eq(target).sum().item()
 
     epoch_time = time.time() - epoch_start
-    accelerator.print(f"Epoch {epoch+1}/{EPOCHS} - Loss: {running_loss/len(train_loader):.4f}, "
+    accelerator.print(f"Epoch {epoch+1}/{EPOCHS} - Loss: {running_loss/len(train_loader):.4f}, "  # ← CHANGED: was print()
                       f"Acc: {100.*correct/total:.2f}%, Time: {epoch_time:.1f}s")
 
 # --- Evaluation ---
@@ -100,10 +108,10 @@ model.eval()
 correct = 0
 total = 0
 with torch.no_grad():
-    for data, target in test_loader:
+    for data, target in test_loader:                          # no .to(device) needed!
         output = model(data)
         _, predicted = output.max(1)
         total += target.size(0)
         correct += predicted.eq(target).sum().item()
 
-accelerator.print(f"\nTest Accuracy: {100.*correct/total:.2f}%")
+accelerator.print(f"\nTest Accuracy: {100.*correct/total:.2f}%")   # ← CHANGED: was print()
