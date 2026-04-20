@@ -71,7 +71,14 @@ When you log in via `ssh user.name@hpc.sci.hpi.de` you are connected with one of
 
 7. After your session is finished, click on the blue button in the bottom left and `Close Remote Connection`
 
-## Scripts
+
+## Interactive SLURM workflow
+
+- ToDo: Add brief instructions on how to install interactive tool and how to use it.
+- For more details, please take a look at https://github.com/aihpi/tool-interactive-slurm
+
+
+## SBATCH Scripts
 
 The `scripts/` directory contains a progressive series of SLURM batch scripts (`.sh`) and their corresponding Python scripts (`.py`). Each builds on the concepts from the previous one.
 
@@ -87,6 +94,16 @@ The `scripts/` directory contains a progressive series of SLURM batch scripts (`
 | `08_multi_gpu` | Train ResNet-18 on CIFAR-100 (4 GPUs with Accelerate) | `sbatch scripts/08_multi_gpu.sh` |
 
 Scripts `05`-`06` use MNIST with a small CNN for fast iteration. Scripts `07`-`08` switch to CIFAR-100 with ResNet-18 — a larger model and dataset that makes the multi-GPU speedup clearly visible.
+
+## FAQ & Troubleshooting
+
+For general cluster issues, see the [Scientific Compute FAQ](https://docs.sc.hpi.de/FAQ/).
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Job stuck in PENDING | Partition full or wrong `--account` | Check with `squeue --me`; verify `--account=aisc` and `--partition=aisc-batch` |
+| `CUDA not available` | Missing GPU allocation | Add `--gpus=1` to your sbatch script |
+| `ModuleNotFoundError` | Python environment not set up | Run `uv sync` first; use `uv run python` instead of `python` |
 
 ## References
 
