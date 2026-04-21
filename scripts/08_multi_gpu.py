@@ -1,5 +1,6 @@
 """
 CIFAR-100 training with ResNet-18 using multiple GPUs via Hugging Face Accelerate.
+(Alternatives are for example torchrun, ...)
 
 Compare this with 07_single_gpu.py — the training logic is almost identical,
 but Accelerate handles distributing the model and data across multiple GPUs.

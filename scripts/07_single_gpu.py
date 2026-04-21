@@ -32,7 +32,7 @@ print(f"Using device: {device}")
 # --- ResNet-18 for CIFAR-100 ---
 # torchvision provides pre-defined ResNet architectures.
 # We modify the final layer to output 100 classes instead of the default 1000 (ImageNet).
-model = models.resnet18(weights=None)
+model = models.resnet18(weights=None) # from 2015, 18 layers, ~11 million parameters
 model.fc = nn.Linear(model.fc.in_features, 100)
 
 
@@ -46,6 +46,7 @@ mean = all_images.mean(dim=(0, 2, 3))  # mean per RGB channel
 std = all_images.std(dim=(0, 2, 3))    # std per RGB channel
 print(f"CIFAR-100 mean: {mean}, std: {std}")
 
+# Cifar images are originally 32x32 RGB.
 # Resize to 224x224 — the resolution ResNet was designed for.
 # This makes training significantly slower (more computation per image),
 # which helps demonstrate the benefit of multi-GPU training later.

@@ -60,7 +60,7 @@ fi
 echo "Installing dependencies..."
 uv sync
 
-# Verify that all imports work
+# Verify that all imports work (Cuda will not be available because we did not request a GPU for this job. We will do so in the next script, 03_gpu_basic.sh).
 echo ""
 echo "Testing imports..."
 uv run python scripts/02_setup_uv.py
