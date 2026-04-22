@@ -36,7 +36,7 @@
 # may need access. You can control permissions with:
 #
 #   mkdir /sc/projects/sci-aisc/my-project
-#   chgrp sci-aisc /sc/projects/sci-aisc/my-project   # Set group ownership to your team
+#   chgrp <your-project-id> /sc/projects/sci-aisc/my-project   # Set group ownership to your team. IMPORTANT: You can ask for your project id by contacting the cluster admins.
 #   chmod 770 /sc/projects/sci-aisc/my-project         # Owner + group: full access, others: none
 #
 # The "770" means:
