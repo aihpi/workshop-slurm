@@ -32,11 +32,11 @@ We outline the important steps below:
 2. When your account is created, you should receive a .zip file via mail, containing your username, initial password, and, crucially, an .ovpn file.
 3. Set your password via the steps explained in the .zip file
 4. Set up a [VPN connection](https://docs.sc.hpi.de/VPN/) and keep it running
-5. Set up a SSH connection with the cluster by following the steps outlined to the left in [SSH guide](https://docs.sc.hpi.de/ssh/)
-6. With your VPN connection **active**, connect to the cluster via SSH: 
+5. With your VPN connection **active**, connect to the cluster through your terminal (Windows: Powershell) via the command: 
    `ssh user.name@hpc.sci.hpi.de` 
 
 > ***Optional:***
+> Set up a SSH connection with the cluster by following the steps outlined to the left in [SSH guide](https://docs.sc.hpi.de/ssh/).
 > Instead of typing the full address every time, create or edit `~/.ssh/config` and add:
 > ```
 > Host hpi-hpc
@@ -46,12 +46,13 @@ We outline the important steps below:
 > After saving, you can connect with just `ssh hpi-hpc`.
 > You can replace `hpi-hpc` with any alias you prefer.
 
-7. Once you are connected, please take some time to familiarise yourself with the basic concepts of [SLURM](https://docs.sc.hpi.de/cluster/SLURM/Basics/), [jobs](https://docs.sc.hpi.de/cluster/SLURM/Job-Examples/#playground-examples) (especially SBatch files), [partitions](https://docs.sc.hpi.de/cluster/Resources/Partitions/) (only the aisc-... partitions are relevant for you), and [run nodes](https://docs.sc.hpi.de/cluster/Resources/Run-Nodes/), `nvidia-smi`, ...
+6. Once you are connected, please take some time to familiarise yourself with the basic concepts of [SLURM](https://docs.sc.hpi.de/cluster/SLURM/Basics/), [jobs](https://docs.sc.hpi.de/cluster/SLURM/Job-Examples/#playground-examples) (especially SBatch files), [partitions](https://docs.sc.hpi.de/cluster/Resources/Partitions/) (only the aisc-... partitions are relevant for you), and [run nodes](https://docs.sc.hpi.de/cluster/Resources/Run-Nodes/), `nvidia-smi`, ...
 
 ### Setting up a Connection with VSCode
 
 When you log in via `ssh user.name@hpc.sci.hpi.de` you are connected with one of the [login nodes](https://docs.sc.hpi.de/cluster/Resources/Login-Nodes/), e.g. `lx01`. The login nodes are only intended for submitting jobs to Compute nodes, inspect the cluster status, and manage your files. You cannot execute scripts on the login nodes. *They are also not intended for a connection to VSCode.* For this, please use one of the [run nodes](https://docs.sc.hpi.de/cluster/Resources/Run-Nodes/). 
 
+0. In VSCode, install the [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) extension from Microsoft, by searching for it in the extensions search bar on the left
 1. In VSCode, open the Command Palette: Shift + Command + P (Mac) / Ctrl + Shift + P (Windows/Linux).
 2. Enter `Remote-SSH: Add New SSH Host...`
 3. Enter your username and the run node address in the following format: `user.name@rx01.hpc.sci.hpi.de` / `user.name@rx02.hpc.sci.hpi.de`
