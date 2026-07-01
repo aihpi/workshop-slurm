@@ -4,7 +4,7 @@
 #SBATCH --partition=aisc-batch
 #SBATCH --time=00:10:00
 #SBATCH --mem=4G
-#SBATCH --exclude=ga03 # Exclude ARM node (ga03)
+#SBATCH --constraint=ARCH:X86
 #SBATCH --output=logs/04_data_%j.log
 #SBATCH --error=logs/04_data_%j.err
 
@@ -23,8 +23,7 @@
 #                                 Limited space (200 GB quota). Good for code, configs, small files.
 #
 #   /sc/projects/sci-aisc/        Shared project storage for your team.
-#                                 Much more space. Use this for datasets, model checkpoints,
-#                                 and anything large or shared across team members.
+#                                 Use this for datasets, and anything shared across team members.
 #                                 IMPORTANT: Create a subfolder for your project (e.g. /sc/projects/sci-aisc/my-project/) to keep things organized!
 #
 # Rule of thumb: code in /sc/home/, data in /sc/projects/sci-aisc/my-project/.

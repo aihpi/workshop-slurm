@@ -4,7 +4,7 @@
 #SBATCH --partition=aisc-batch
 #SBATCH --time=00:01:00
 #SBATCH --mem=1G
-#SBATCH --exclude=ga03 # Exclude ARM node (ga03)
+#SBATCH --constraint=ARCH:X86 # Only use x86 nodes, see https://docs.sc.hpi.de/cluster/Resources/Features/
 #SBATCH --output=logs/01_hello_%j.log
 #SBATCH --error=logs/01_hello_%j.err
 
@@ -27,7 +27,7 @@ echo ""
 mkdir -p logs
 
 # Run the simple Python script that prints "Hello, World!" and produces an error to demonstrate logging
-python scripts/01_hello_world.py
+python3 scripts/01_hello_world.py
 
 
 echo ""

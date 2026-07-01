@@ -4,7 +4,7 @@
 #SBATCH --partition=aisc-batch
 #SBATCH --time=00:10:00
 #SBATCH --mem=4G
-#SBATCH --exclude=ga03 # Exclude ARM node (ga03)
+#SBATCH --constraint=ARCH:X86 # Only use x86 nodes, see https://docs.sc.hpi.de/cluster/Resources/Features/
 #SBATCH --output=logs/02_setup_uv_%j.log
 #SBATCH --error=logs/02_setup_uv_%j.err
 

@@ -1,12 +1,8 @@
 [project]
 name = "workshop-slurm"
 version = "0.1.0"
-requires-python = ">=3.10"
-dependencies = [
-    "torch",
-    "torchvision",
-    "accelerate",
-]
+requires-python = ">=3.12"
+dependencies = ["torch", "torchvision", "accelerate"]
 
 [tool.uv]
 extra-index-url = ["https://download.pytorch.org/whl/cu128"]

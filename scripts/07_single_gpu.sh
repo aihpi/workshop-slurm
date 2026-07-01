@@ -4,7 +4,7 @@
 #SBATCH --partition=aisc-batch
 #SBATCH --time=00:15:00
 #SBATCH --mem=16G
-#SBATCH --exclude=ga03 # Exclude ARM node (ga03)
+#SBATCH --constraint=ARCH:X86
 #SBATCH --cpus-per-task=4
 #SBATCH --gpus=1
 #SBATCH --output=logs/07_single_%j.log
