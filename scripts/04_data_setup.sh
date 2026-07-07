@@ -15,54 +15,79 @@
 # View errors: cat logs/04_data_<job_id>.err
 # ========================================
 #
-# Shared Project Storage vs. Home Directory
-# ------------------------------------------
-# On the cluster, you have two main storage locations:
-#
-#   /sc/home/<username>/          Your personal home directory.
-#                                 Limited space (200 GB quota). Good for code, configs, small files.
-#
-#   /sc/projects/sci-aisc/        Shared project storage for your team.
-#                                 Use this for datasets, and anything shared across team members.
-#                                 IMPORTANT: Create a subfolder for your project (e.g. /sc/projects/sci-aisc/my-project/) to keep things organized!
-#
-# Rule of thumb: code in /sc/home/, data in /sc/projects/sci-aisc/my-project/.
+# This script downloads MNIST and CIFAR-100 to shared project storage.
+# The comment block below covers the two storage tiers this workshop uses
+# (home and project) and points at the docs for the scratch tiers you'll
+# want once your jobs get larger.
 #
 #
-# Securing a Shared Folder
+# The two storage tiers we use in this workshop
+# ---------------------------------------------
+#   /sc/home/<user>/                 Your personal home directory.
+#                                    Persistent. 200 GiB hard quota (enforced).
+#                                    Use for: code, configs, trained models
+#                                    small enough to keep long-term.
+#
+#   /sc/projects/<group>/<project>/  Shared project storage for your team.
+#                                    Persistent. Soft ~10 TB target per project.
+#                                    Use for: datasets and anything the team
+#                                    shares. Create a project subfolder to stay
+#                                    organized.
+#
+# Rule of thumb: code in /sc/home/, data in /sc/projects/<group>/<project>/.
+#
+#
+# There's more: scratch space (not used in this workshop)
+# -------------------------------------------------------
+# For larger training jobs, the cluster also provides two scratch tiers —
+# local per-node NVMe ($SLURM_SCRATCH) and a global parallel filesystem
+# (/sc/scratch). They are faster than project storage and don't count against
+# the ~10 TB project soft-target, but they are TEMPORARY: local scratch is
+# deleted when the job ends, and global scratch may be wiped without warning.
+#
+# The recommended workflow is: copy your dataset into $SLURM_SCRATCH at the
+# start of the job, write checkpoints and results there during training, and
+# copy the results back to /sc/home/ before the job ends. See the docs:
+#
+#   Storage overview: https://docs.sc.hpi.de/cluster/Storage/Overview/
+#   Quotas:           https://docs.sc.hpi.de/cluster/Storage/Quotas/
+#   Scratch space:    https://docs.sc.hpi.de/cluster/Storage/Scratch-Space/
+#   Data transfer:    https://docs.sc.hpi.de/cluster/Storage/Data-Transfer/
+#
+#
+# Securing a shared folder
 # ------------------------
-# When you create a new folder in /sc/projects/sci-aisc/, other team members
-# may need access. You can control permissions with:
+# When you create a new folder under /sc/projects/, control access with:
 #
 #   mkdir /sc/projects/sci-aisc/my-project
-#   chgrp <your-project-id> /sc/projects/sci-aisc/my-project   # Set group ownership to your team. IMPORTANT: You can ask for your project id by contacting the cluster admins.
-#   chmod 770 /sc/projects/sci-aisc/my-project         # Owner + group: full access, others: none
+#   chgrp <your-project-id> /sc/projects/sci-aisc/my-project
+#   chmod 770 /sc/projects/sci-aisc/my-project
 #
 # The "770" means:
-#   7 (owner)  = read (4) + write (2) + execute (1)
-#   7 (group)  = read (4) + write (2) + execute (1)
-#   0 (others) = no access (0)
-# (none - 0, execute - 1, write - 2, read - 4; add them up for combinations)
+#   7 (owner) = read(4) + write(2) + execute(1)
+#   7 (group) = read(4) + write(2) + execute(1)
+#   0 (others) = no access
+# Contact the cluster admins to get your project's group ID.
+#
 #
 # Symlinks
 # --------
-# A symlink (symbolic link) is a shortcut that points to another location.
-# Instead of using long paths like /sc/projects/sci-aisc/workshop-slurm/data
-# in every script, you can create a symlink in your repo:
+# Instead of typing /sc/projects/sci-aisc/workshop-slurm/data in every script,
+# create a symlink in your repo:
 #
 #   ln -s /sc/projects/sci-aisc/workshop-slurm/data ./data
 #
-# Now ./data points to the shared storage. Your code can use "./data" as if
-# the data were local, but it actually lives in the shared project folder.
-# This keeps your scripts clean and portable.
+# Now ./data points to shared storage. Scripts can reference "./data" as if
+# it were local, keeping paths short and portable.
 #
 #
-# Best Practices & Caution
-# ------------------------
-# - Be careful with shared data! Coordinate with your team before deleting!
-# - Use symlinks to keep your code paths short and portable
-# - Don't duplicate datasets — download once to shared storage, reference from there
-#
+# Best practices
+# --------------
+# - Datasets: download once to /sc/projects/, everyone in your teamreads from there.
+# - Coordinate with your team before deleting anything in /sc/projects/.
+# - Be careful in /sc/projects/sci-aisc/ — it's shared with all other AISC users. Don't delete or overwrite anything you don't own.
+# - `rm` is permanent — no recycle bin from the terminal.
+# - Home quota is hard (200 GiB). Check usage with `du -hd 1 ~ | sort -hr`.
 
 echo "========================================"
 echo "SLURM Job ID: $SLURM_JOB_ID"

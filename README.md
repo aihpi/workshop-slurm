@@ -7,6 +7,10 @@ This repository contains materials for the **2-hour HPC Cluster Workshop** by th
 
 For those not attending a workshop, we recommend reviewing the accompanying [presentation PDF](https://github.com/aihpi/workshop-slurm/blob/main/slides/workshop-slurm.pdf) in the slides folder.
 
+<p align="center">
+  <img src="00_aisc/img/Screenshot_slide.png" alt="Workshop slide preview" width="66%">
+</p>
+
 ## Workshop Structure
 
 | Part   | Topic                                                   | Duration  |
@@ -22,9 +26,7 @@ For those not attending a workshop, we recommend reviewing the accompanying [pre
 | **II** | Interactive: Batch scripts (`01`-`08`)                  | 20 min    |
 | **II** | Conclusion and Feedback                                 | 5 min     |
 
-## Getting Started
-
-### Cluster Access Setup
+## 1. Cluster Access Setup
 
 You can find all of this information in the [Scientific Compute Documentation](https://docs.sc.hpi.de).
 Please note that the Docs provide information for the [general HPI HPC](https://docs.sc.hpi.de/cluster/Resources/Partitions/), of which the [AISC infrastructure](https://docs.sc.hpi.de/aisc/) is a part of.
@@ -64,17 +66,48 @@ When you log in via `ssh firstname.lastname@hpc.sci.hpi.de` you are connected wi
     >      Host rx01.hpc.sci.hpi.de
     >         HostName rx01.hpc.sci.hpi.de
     >         User firstname.lastname
-5.  Now you should be able to connect easily to the run nodes via the Remote Explorer on the left in VSCode:
+5. If asked for the OS of the host, select "Linux".
+6. Now you should be able to connect easily to the run nodes via the Remote Explorer on the left in VSCode:
 
 <img src="00_aisc/img/Screenshot1.png" alt="Alt text" width="300">
 
-6. Once you are connected, you should see the following in the bottom left corner:
+7. Once you are connected, you should see the following in the bottom left corner:
 
 <img src="00_aisc/img/Screenshot2.png" alt="Alt text" width="200">
 
-7. After your session is finished, click on the blue button in the bottom left and `Close Remote Connection`
+8. After your session is finished, click on the blue button in the bottom left and `Close Remote Connection`
 
-## Interactive SLURM Workflow
+## 2. SBATCH Scripts
+
+The `scripts/` directory contains a progressive series of SLURM batch scripts (`.sh`) and their corresponding Python scripts (`.py`). Each builds on the concepts from the previous one.
+
+| Script               | Topic                                                                                                                 | Command                                |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| `01_hello_world`     | Basic SLURM job submission and logging                                                                                | `sbatch scripts/01_hello_world.sh`     |
+| `02_setup_uv`        | Install UV and Python dependencies. For more information on UV, please read the [UV docs](https://docs.astral.sh/uv/) | `sbatch scripts/02_setup_uv.sh`        |
+| `03_gpu_basic`       | Verify GPU allocation with `nvidia-smi`                                                                               | `sbatch scripts/03_gpu_basic.sh`       |
+| `04_data_setup`      | Download datasets to shared project storage                                                                           | `sbatch scripts/04_data_setup.sh`      |
+| `05_python_training` | Train a simple CNN on MNIST (single GPU)                                                                              | `sbatch scripts/05_python_training.sh` |
+| `06_array_jobs`      | Hyperparameter sweep with SLURM array jobs                                                                            | `sbatch scripts/06_array_jobs.sh`      |
+| `07_single_gpu`      | Train ResNet-18 on CIFAR-100 (single GPU)                                                                             | `sbatch scripts/07_single_gpu.sh`      |
+| `08_multi_gpu`       | Train ResNet-18 on CIFAR-100 (4 GPUs with Accelerate)                                                                 | `sbatch scripts/08_multi_gpu.sh`       |
+
+Scripts `05`-`06` use MNIST with a small CNN for fast iteration. Scripts `07`-`08` switch to CIFAR-100 with ResNet-18 — a larger model and dataset that makes the multi-GPU speedup clearly visible.
+
+## 3. Storage on the Cluster
+
+For more details, see the description in script `04_data_setup.sh` and the [docs](https://docs.sc.hpi.de/cluster/Storage/Overview/).
+
+| Tier | Path | Persistent? | Quota | Use for |
+| ---- | ---- | ----------- | ----- | ------- |
+| Home | `/sc/home/<user>/` | Yes | **200 GiB hard** | Code, configs, trained models worth keeping |
+| Project | `/sc/projects/sci-aisc/<project>/` | Yes | ~10 TB soft target | Datasets and anything shared across the team. Use [subdirectories, access restrictions and symlinks](scripts/04_data_setup.sh) for your project! |
+| Local scratch | `$SLURM_SCRATCH` | **No — deleted when the job ends** | Node-dependent | Fast per-job workspace for checkpoints, logs, temp files (see docs) |
+| Global scratch | `/sc/scratch/` | Best-effort, may be wiped | None enforced | Cross-job temp data too big for local scratch (see docs) |
+
+Rule of thumb: **code in home, data in project.** For larger training runs, the recommended workflow is to stage the dataset into `$SLURM_SCRATCH`, write checkpoints and results there, and copy them back to home before the job ends — see the [Scratch Space docs](https://docs.sc.hpi.de/cluster/Storage/Scratch-Space/) and [Storage Overview](https://docs.sc.hpi.de/cluster/Storage/Overview/) for details.
+
+## 4. Interactive SLURM Workflow
 
 We provide a tool for interactive SSH sessions on SLURM compute nodes, with VSCode Remote-SSH integration. You do not need to use this tool, especially not if you know how to use SLURM. However, it may be useful for beginners, as it simplifies the process of reserving compute nodes and GPUs. When using it please always keep in mind that you are using a shared resource, and that you should not reserve more resources than you need, and terminate your sessions when you are done.
 
@@ -100,24 +133,7 @@ The setup script generates SSH keys, installs scripts on the cluster, and config
 | `remote h100 [count]` | Reserve H100 GPUs (1-8)            |
 | `remote exit`         | Terminate all interactive sessions |
 
-## SBATCH Scripts
-
-The `scripts/` directory contains a progressive series of SLURM batch scripts (`.sh`) and their corresponding Python scripts (`.py`). Each builds on the concepts from the previous one.
-
-| Script               | Topic                                                                                                                 | Command                                |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| `01_hello_world`     | Basic SLURM job submission and logging                                                                                | `sbatch scripts/01_hello_world.sh`     |
-| `02_setup_uv`        | Install UV and Python dependencies. For more information on UV, please read the [UV docs](https://docs.astral.sh/uv/) | `sbatch scripts/02_setup_uv.sh`        |
-| `03_gpu_basic`       | Verify GPU allocation with `nvidia-smi`                                                                               | `sbatch scripts/03_gpu_basic.sh`       |
-| `04_data_setup`      | Download datasets to shared project storage                                                                           | `sbatch scripts/04_data_setup.sh`      |
-| `05_python_training` | Train a simple CNN on MNIST (single GPU)                                                                              | `sbatch scripts/05_python_training.sh` |
-| `06_array_jobs`      | Hyperparameter sweep with SLURM array jobs                                                                            | `sbatch scripts/06_array_jobs.sh`      |
-| `07_single_gpu`      | Train ResNet-18 on CIFAR-100 (single GPU)                                                                             | `sbatch scripts/07_single_gpu.sh`      |
-| `08_multi_gpu`       | Train ResNet-18 on CIFAR-100 (4 GPUs with Accelerate)                                                                 | `sbatch scripts/08_multi_gpu.sh`       |
-
-Scripts `05`-`06` use MNIST with a small CNN for fast iteration. Scripts `07`-`08` switch to CIFAR-100 with ResNet-18 — a larger model and dataset that makes the multi-GPU speedup clearly visible.
-
-## FAQ & Troubleshooting
+## 5. FAQ & Troubleshooting
 
 For general cluster issues, see the [Scientific Compute FAQ](https://docs.sc.hpi.de/FAQ/).
 
@@ -126,25 +142,25 @@ For general cluster issues, see the [Scientific Compute FAQ](https://docs.sc.hpi
 
 ToDo: Add troubleshooting section
 
-## References
+## 6. References
 
 - [Scientific Compute Documentation](https://docs.sc.hpi.de)
 - [AISC Infrastructure](https://docs.sc.hpi.de/aisc/)
 - [SLURM Basics](https://docs.sc.hpi.de/cluster/SLURM/Basics/)
 - [SLURM Job Examples](https://docs.sc.hpi.de/cluster/SLURM/Job-Examples/)
 
-## Authors
+## 7. Authors
 
 - [David Goll](https://github.com/golldavid)
 - [Felix Boelter](https://github.com/felixboelter)
 
-## License
+## 8. License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## Acknowledgements
+## 9. Acknowledgements
 
 <img src="00_aisc/img/logo_bmftr_de.png" alt="drawing" style="width:170px;"/>
 
