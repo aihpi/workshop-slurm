@@ -8,7 +8,7 @@ This repository contains materials for the **2-hour HPC Cluster Workshop** by th
 For those not attending a workshop, we recommend reviewing the accompanying [presentation PDF](https://github.com/aihpi/workshop-slurm/blob/main/slides/workshop-slurm.pdf) in the slides folder.
 
 <p align="center">
-  <img src="00_aisc/img/Screenshot_slide.png" alt="Workshop slide preview" width="66%">
+  <img src="00_aisc/img/Screenshot_slide.png" alt="Workshop slide preview" width="100%">
 </p>
 
 ## Workshop Structure
@@ -69,11 +69,15 @@ When you log in via `ssh firstname.lastname@hpc.sci.hpi.de` you are connected wi
 5. If asked for the OS of the host, select "Linux".
 6. Now you should be able to connect easily to the run nodes via the Remote Explorer on the left in VSCode:
 
+<p align="center">
 <img src="00_aisc/img/Screenshot1.png" alt="Alt text" width="300">
+</p>
 
 7. Once you are connected, you should see the following in the bottom left corner:
 
+<p align="center">
 <img src="00_aisc/img/Screenshot2.png" alt="Alt text" width="200">
+</p>
 
 8. After your session is finished, click on the blue button in the bottom left and `Close Remote Connection`
 
