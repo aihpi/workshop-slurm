@@ -1,5 +1,6 @@
 # Workshop runtime artifacts
 logs/
+logs_backup/
 data/
 data
 .venv/

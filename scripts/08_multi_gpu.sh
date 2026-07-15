@@ -3,10 +3,10 @@
 #SBATCH --account=aisc
 #SBATCH --partition=aisc-batch
 #SBATCH --time=00:15:00
-#SBATCH --mem=32G
+#SBATCH --mem=32G  # was 16 in script 07
 #SBATCH --constraint=ARCH:X86
-#SBATCH --cpus-per-task=8
-#SBATCH --gpus=4
+#SBATCH --cpus-per-task=8  # was 4 in script 07
+#SBATCH --gpus=4  # was 1 in script 07
 #SBATCH --output=logs/08_multi_%j.log
 #SBATCH --error=logs/08_multi_%j.err
 

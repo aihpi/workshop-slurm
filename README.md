@@ -3,7 +3,7 @@
 <h1> AISC Cluster Workshop: Introduction to SLURM</h1>
 </div>
 
-This repository contains materials for the **2-hour HPC Cluster Workshop** by the [AI Service Centre Berlin-Brandenburg (AISC)](https://hpi.de/kisz). Participants learn how to access the AISC/HPI cluster, understand the basics of SLURM, and run GPU workloads independently.
+This repository contains materials for the **2-3-hour HPC Cluster Workshop** by the [AI Service Centre Berlin-Brandenburg (AISC)](https://hpi.de/kisz). Participants learn how to access the AISC/HPI cluster, understand the basics of SLURM, and run GPU workloads independently.
 
 For those not attending a workshop, we recommend reviewing the accompanying [presentation PDF](https://github.com/aihpi/workshop-slurm/blob/main/slides/workshop-slurm.pdf) in the slides folder.
 
