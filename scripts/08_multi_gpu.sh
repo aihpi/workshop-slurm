@@ -4,9 +4,9 @@
 #SBATCH --partition=pot-hpi-aisc-batch
 #SBATCH --time=00:15:00
 #SBATCH --mem=32G  # was 16 in script 07
-#SBATCH --constraint=GPU_SKU:H100
 #SBATCH --cpus-per-task=16  # was 4 in script 07: still 4 CPUs per GPU (see slide 25)
-#SBATCH --gpus=4  # was 1 in script 07
+#SBATCH --nodes=1
+#SBATCH --gpus=h100:4  # was h100:1 in script 07
 #SBATCH --output=logs/08_multi_%j.log
 #SBATCH --error=logs/08_multi_%j.err
 

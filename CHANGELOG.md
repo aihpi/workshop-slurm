@@ -9,7 +9,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 - Interactive SLURM workflow documentation in README with install/usage instructions for [tool-interactive-slurm](https://github.com/aihpi/tool-interactive-slurm)
 - `--constraint=ARCH:X86` to the CPU scripts `01`, `02`, `04` (avoid the ARM node, which is incompatible with the uv binary)
-- `--constraint=GPU_SKU:H100` to the GPU scripts `03` and `05`-`08` (only H100 nodes)
+- Typed GPU request `--gpus=h100:N` in the GPU scripts `03` and `05`-`08` (only H100 nodes, not the ARM L40 node or the A30 node)
+- `--nodes=1` in the GPU scripts `03` and `05`-`08` (the cluster warns on every GPU job without `--nodes`)
 - `04_data_setup` skips the download when the datasets already exist in shared project storage
 - `02_setup_uv` tells the user to run `source ~/.local/bin/env` before submitting `03`
 - `example_logs/` with the logs of a complete run of all scripts from a fresh account

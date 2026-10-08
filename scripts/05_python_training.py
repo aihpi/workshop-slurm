@@ -22,7 +22,7 @@ EPOCHS = 3               # Number of full passes through the training data
 
 # --- Device setup ---
 # This checks if a GPU is available and uses it, otherwise falls back to CPU.
-# On the cluster, this requires --gpus=1 in your sbatch script.
+# On the cluster, this requires --gpus=h100:1 in your sbatch script.
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 

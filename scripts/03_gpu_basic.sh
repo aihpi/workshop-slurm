@@ -4,10 +4,10 @@
 #SBATCH --partition=pot-hpi-aisc-batch
 #SBATCH --time=00:05:00
 #SBATCH --mem=4G
-#SBATCH --constraint=GPU_SKU:H100 # Only use H100 nodes (excludes the ARM L40 node and the A30 node), see https://docs.sc.hpi.de/cluster/Resources/Features/
 #SBATCH --output=logs/03_gpu_basic_%j.log
 #SBATCH --error=logs/03_gpu_basic_%j.err
-#SBATCH --gpus=1
+#SBATCH --nodes=1
+#SBATCH --gpus=h100:1 # One H100. The type keeps the job off the ARM L40 node (ga03) and the A30 node (gx17v1)
 
 # ========================================
 # Usage: sbatch scripts/03_gpu_basic.sh

@@ -4,9 +4,9 @@
 #SBATCH --partition=pot-hpi-aisc-batch
 #SBATCH --time=00:10:00
 #SBATCH --mem=8G
-#SBATCH --constraint=GPU_SKU:H100
 #SBATCH --cpus-per-task=4
-#SBATCH --gpus=1
+#SBATCH --nodes=1
+#SBATCH --gpus=h100:1
 #SBATCH --output=logs/06_sweep_%A_%a.log
 #SBATCH --error=logs/06_sweep_%A_%a.err
 #SBATCH --array=0-3
