@@ -5,7 +5,7 @@
 - Level: workshop
 - Format(s): workshop
 - Language: en-US (TBD: slides 2 to 5 and 35 are German; translate or keep?)
-- Slot: 180 min assumed (TBD: README says "2 to 3 hours"; confirm)
+- Slot: 180 min, 16 October 2026, 13:00 to 16:00
 - Setting: TBD (room or online, group size, own laptops)
 - Notebook flavour: none
 - Template: TBD (current deck is Keynote, `slides/workshop-slurm.key`)
@@ -15,6 +15,7 @@
   - 2026-10-07 review mode; component split confirmed by Felix
   - 2026-10-07 audience, whole workshop, complete (see review.md)
   - 2026-10-07 presenter, whole workshop, full, complete (see review.md)
+  - 2026-10-08 workshop date set; reservation of one H100 node requested
   - 2026-10-07 refine round 1: learner clarified (approved proposal only, not researchers); CPU vs GPU slides stay; partitions renamed to pot-hpi-aisc-* in scripts and README; script 04 skips the download when shared data exists; all participants are in the aisc-storage group, so they can read the shared data
 
 ## 2. Learner
@@ -94,6 +95,8 @@ Deck file: `slides/workshop-slurm.key`. Owned by the meta level: title slide, ag
 | S2.4, hands-on | 26 | G2, G3, G4, G5 | repo cloned | logs from 01 to 08 | `scripts/`, shared data dir | deck slide 34, README §2 to 3 | 1 |
 
 Speaker note for S2.4: after 02 has finished, tell everyone to read the end of its log and run `source ~/.local/bin/env` once before submitting 03. Without it, 03 fails with `uv: command not found` in the `.err` file while the job still shows COMPLETED.
+
+Speaker note for the reservation: on 16 October 2026, 13:00 to 16:00, one H100 node is reserved as `aisc-workshop` (TBD: name and node confirmed by aisc-helpdesk@hpi.de). At the start of S2.4, before submitting 01, everyone runs `export SBATCH_RESERVATION=aisc-workshop` once in their terminal; from then on `sbatch` sends every job from that terminal to the reserved node, without changes to the scripts. The CPU-only scripts 01, 02 and 04 also run there, because the H100 node is an x86 node with 224 CPUs. A new terminal needs the command again, like `source ~/.local/bin/env`. 8 GPUs fit two 08 jobs at a time, so run 08 as a presenter demo and show the example logs.
 
 Speaker note for 08: 4 free H100s on one node are often not available, so 08 may wait in the queue for a long time. Show `/usr/bin/squeue --me --start` live (plain `squeue` is aliased to `sci-squeue.py`, which rejects `--start`), then use `example_logs/07_single_*.log` and `example_logs/08_multi_*.log` for the comparison. Measured on 2026-10-07: 07 started after 5 s and ran 3.5 min; 08 waited 1 h 37 min in the queue and ran 1 min 42 s. Fairshare is charged per GPU (billing 1000 vs 4000), so 08 costs about 8 GPU-minutes against 3.5 for 07.
 | S2.5, reflection | 5 | none | logs from 01 to 08 | feedback given | QR code | deck slide 35 | 1 |
