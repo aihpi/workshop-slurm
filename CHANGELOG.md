@@ -13,7 +13,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - `04_data_setup` skips the download when the datasets already exist in shared project storage
 - `02_setup_uv` tells the user to run `source ~/.local/bin/env` before submitting `03`
 - `example_logs/` with the logs of a complete run of all scripts from a fresh account
-- `plan.md` (workshop plan) and `review.md` (review of 2026-10-07)
 
 ### Changed
 - Reworked workshop structure table with updated time slots and topics
@@ -21,10 +20,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Partition `aisc-batch` renamed to `pot-hpi-aisc-batch` in all scripts and the README (the old names no longer exist)
 - `02_setup_uv` time limit raised from 10 to 30 min (a first install took 6 min for one user)
 - `08_multi_gpu` requests 16 CPUs (4 per GPU, as in `07`) instead of 8
+- Slides use the partition names `pot-hpi-aisc-*` (slides 13, 31, 32), the current compute node names (slides 11, 31) and `--gpus` instead of `--gres=gpu` (slide 25), as the scripts do
+- `slides/workshop-slurm.pdf` and `.pptx` re-exported from the Keynote file, so all three formats match
 
 ### Fixed
 - Changed `data/` to `data` in `.gitignore` to also match the symlink
 - `08_multi_gpu` computes the test accuracy over all GPUs with `accelerator.gather_for_metrics()` instead of only the main GPU's share
+- Slide 8 says "consult our FAQ" instead of "consolidate"; the template footer on the break slide (19) is removed
 
 ## [0.3.0] - 2026-04-20
 
