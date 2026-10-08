@@ -6,7 +6,7 @@
 #SBATCH --mem=8G
 #SBATCH --cpus-per-task=4
 #SBATCH --nodes=1
-#SBATCH --gpus=h100:1
+#SBATCH --gpus=h100:1 # or a30:1; any GPU except the ARM L40: --gpus=1 --constraint=ARCH:X86
 #SBATCH --output=logs/05_mnist_%j.log
 #SBATCH --error=logs/05_mnist_%j.err
 
