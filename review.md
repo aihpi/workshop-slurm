@@ -1,6 +1,6 @@
 # Review of the SLURM workshop
 
-Review date 2026-10-07. The material reviewed was the deck (`slides/workshop-slurm.pdf`, 35 slides, read as text in `slides/workshop-slurm.outline.md`), `README.md` and `scripts/01` to `08`. The reviewers assumed a mixed group of new AISC cluster users: ML researchers fluent in Python, and beginners who are also new to the terminal, SSH and Linux. The slot was assumed to be 180 min. Because the text was extracted from the PDF, speaker notes are missing, and slides 6, 14, 18 and 20 (image only) could not be checked.
+Review date 2026-10-07. The material reviewed was the deck (`slides/workshop-slurm.pdf`, 35 slides, read as text extracted from the PDF), `README.md` and `scripts/01` to `08`. The reviewers assumed a mixed group of new AISC cluster users: ML researchers fluent in Python, and beginners who are also new to the terminal, SSH and Linux. The slot was assumed to be 180 min. Because the text was extracted from the PDF, speaker notes are missing, and slides 6, 14, 18 and 20 (image only) could not be checked.
 
 The one-line verdict: the workshop fits the slot. The batch-script part probably fails on a fresh clone, and the access part stalls for anyone without an account.
 
