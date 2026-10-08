@@ -1,10 +1,10 @@
 #!/bin/bash
 #SBATCH --job-name=mnist_training
 #SBATCH --account=aisc
-#SBATCH --partition=aisc-batch
+#SBATCH --partition=pot-hpi-aisc-batch
 #SBATCH --time=00:10:00
 #SBATCH --mem=8G
-#SBATCH --constraint=ARCH:X86
+#SBATCH --constraint=GPU_SKU:H100
 #SBATCH --cpus-per-task=4
 #SBATCH --gpus=1
 #SBATCH --output=logs/05_mnist_%j.log

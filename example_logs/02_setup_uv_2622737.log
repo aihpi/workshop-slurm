@@ -1,0 +1,34 @@
+========================================
+SLURM Job ID: 2622737
+Running on node: gx17v1
+Start time: Wed Oct  7 10:43:12 PM CEST 2026
+========================================
+
+Installing uv...
+installing to /sc/home/<user>/.local/bin
+  uv
+  uvx
+everything's installed!
+
+To add $HOME/.local/bin to your PATH, either restart your shell or run:
+
+    source $HOME/.local/bin/env (sh, bash, zsh)
+    source $HOME/.local/bin/env.fish (fish)
+Installing dependencies...
+
+Testing imports...
+All imports successful!
+PyTorch version:     2.11.0+cu128
+Torchvision version: 0.26.0+cu128
+CUDA available:      False
+
+IMPORTANT: before submitting 03, run this once in your terminal
+(or open a new terminal):
+
+    source ~/.local/bin/env
+
+========================================
+Job finished!
+End time: Wed Oct  7 10:49:14 PM CEST 2026
+Runtime: 362s
+========================================

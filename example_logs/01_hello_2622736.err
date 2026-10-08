@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/sc/home/<user>/workshop-slurm/scripts/01_hello_world.py", line 5, in <module>
+    oops = 1 / 0
+           ~~^~~
+ZeroDivisionError: division by zero

@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=data_setup
 #SBATCH --account=aisc
-#SBATCH --partition=aisc-batch
+#SBATCH --partition=pot-hpi-aisc-batch
 #SBATCH --time=00:10:00
 #SBATCH --mem=4G
 #SBATCH --constraint=ARCH:X86
@@ -101,9 +101,16 @@ DATA_DIR="/sc/projects/sci-aisc/workshop-slurm/data"
 # Create the shared data directory if it doesn't exist
 mkdir -p "$DATA_DIR"
 
-echo "Downloading datasets to shared storage: $DATA_DIR"
-echo ""
-uv run python scripts/04_data_setup.py
+# Only download if the datasets are not already in shared storage.
+# Usually someone (e.g. the workshop presenter) has downloaded them already.
+if [ -d "$DATA_DIR/MNIST/raw" ] && [ -d "$DATA_DIR/cifar-100-python" ]; then
+    echo "Datasets already present in shared storage: $DATA_DIR"
+    echo "Skipping download."
+else
+    echo "Downloading datasets to shared storage: $DATA_DIR"
+    echo ""
+    uv run python scripts/04_data_setup.py
+fi
 
 # Create a symlink from ./data to the shared storage location
 # This lets scripts reference "./data" while the actual data lives in shared storage.

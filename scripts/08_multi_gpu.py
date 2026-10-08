@@ -16,6 +16,11 @@ Changes from 07_single_gpu.py at a glance (search for "← NEW" and "← CHANGED
   2. print() → accelerator.print() (only main GPU prints)
   3. model.to(device) → accelerator.prepare() (handles device placement + data splitting)
   4. loss.backward() → accelerator.backward(loss) (syncs gradients across GPUs)
+  5. Test predictions are collected from all GPUs with accelerator.gather_for_metrics()
+
+How to compare with 07: look at the time per epoch. BATCH_SIZE is per GPU, so with
+4 GPUs each optimizer step sees 4 x 128 = 512 images (07: 128), and an epoch has
+a quarter of the steps. Accuracy after 5 epochs is therefore not directly comparable.
 
 Run with: sbatch scripts/08_multi_gpu.sh
 """
@@ -33,7 +38,7 @@ from accelerate import Accelerator                          # ← NEW: import Ac
 accelerator = Accelerator()                                  # ← NEW: auto-detects GPUs
 
 # --- Hyperparameters ---
-BATCH_SIZE = 128
+BATCH_SIZE = 128     # per GPU: with 4 GPUs, 512 images per optimizer step
 LEARNING_RATE = 0.01
 EPOCHS = 5
 
@@ -97,7 +102,7 @@ for epoch in range(EPOCHS):
 
         running_loss += loss.item()
         _, predicted = output.max(1)
-        total += target.size(0)
+        total += target.size(0)                                # this GPU's share only; good enough as a training estimate
         correct += predicted.eq(target).sum().item()
 
     epoch_time = time.time() - epoch_start
@@ -112,6 +117,7 @@ with torch.no_grad():
     for data, target in test_loader:                          # no .to(device) needed!
         output = model(data)
         _, predicted = output.max(1)
+        predicted, target = accelerator.gather_for_metrics((predicted, target))  # ← NEW: collect from all GPUs
         total += target.size(0)
         correct += predicted.eq(target).sum().item()
 

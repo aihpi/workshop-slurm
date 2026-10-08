@@ -8,15 +8,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ### Added
 - Interactive SLURM workflow documentation in README with install/usage instructions for [tool-interactive-slurm](https://github.com/aihpi/tool-interactive-slurm)
-- `--exclude=ga03` to all scripts (ARM node, incompatible with uv binary)
-- `--exclude=gx17v1` to `03_gpu_basic` (restrict to H100 GPU nodes)
+- `--constraint=ARCH:X86` to the CPU scripts `01`, `02`, `04` (avoid the ARM node, which is incompatible with the uv binary)
+- `--constraint=GPU_SKU:H100` to the GPU scripts `03` and `05`-`08` (only H100 nodes)
+- `04_data_setup` skips the download when the datasets already exist in shared project storage
+- `02_setup_uv` tells the user to run `source ~/.local/bin/env` before submitting `03`
+- `example_logs/` with the logs of a complete run of all scripts from a fresh account
+- `plan.md` (workshop plan) and `review.md` (review of 2026-10-07)
 
 ### Changed
 - Reworked workshop structure table with updated time slots and topics
 - Moved `--job-name` to top of SBATCH directives for consistency across all scripts
+- Partition `aisc-batch` renamed to `pot-hpi-aisc-batch` in all scripts and the README (the old names no longer exist)
+- `02_setup_uv` time limit raised from 10 to 30 min (a first install took 6 min for one user)
+- `08_multi_gpu` requests 16 CPUs (4 per GPU, as in `07`) instead of 8
 
 ### Fixed
 - Changed `data/` to `data` in `.gitignore` to also match the symlink
+- `08_multi_gpu` computes the test accuracy over all GPUs with `accelerator.gather_for_metrics()` instead of only the main GPU's share
 
 ## [0.3.0] - 2026-04-20
 

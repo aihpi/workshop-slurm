@@ -52,7 +52,7 @@ We outline the important steps below:
 > After saving, you can connect with just `ssh hpi-hpc`.
 > You can replace `hpi-hpc` with any alias you prefer.
 
-6. Once you are connected, please take some time to familiarise yourself with the basic concepts of [SLURM](https://docs.sc.hpi.de/cluster/SLURM/Basics/), [jobs](https://docs.sc.hpi.de/cluster/SLURM/Job-Examples/#playground-examples) (especially SBatch files), [partitions](https://docs.sc.hpi.de/cluster/Resources/Partitions/) (only the aisc-... partitions are relevant for you), and [run nodes](https://docs.sc.hpi.de/cluster/Resources/Run-Nodes/), `nvidia-smi`, ...
+6. Once you are connected, please take some time to familiarise yourself with the basic concepts of [SLURM](https://docs.sc.hpi.de/cluster/SLURM/Basics/), [jobs](https://docs.sc.hpi.de/cluster/SLURM/Job-Examples/#playground-examples) (especially SBatch files), [partitions](https://docs.sc.hpi.de/cluster/Resources/Partitions/) (only the `pot-hpi-aisc-...` partitions are relevant for you), and [run nodes](https://docs.sc.hpi.de/cluster/Resources/Run-Nodes/), `nvidia-smi`, ...
 
 ### Setting up a Connection with VSCode
 
@@ -88,7 +88,7 @@ The `scripts/` directory contains a progressive series of SLURM batch scripts (`
 | Script               | Topic                                                                                                                 | Command                                |
 | -------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
 | `01_hello_world`     | Basic SLURM job submission and logging                                                                                | `sbatch scripts/01_hello_world.sh`     |
-| `02_setup_uv`        | Install UV and Python dependencies. For more information on UV, please read the [UV docs](https://docs.astral.sh/uv/) | `sbatch scripts/02_setup_uv.sh`        |
+| `02_setup_uv`        | Install UV and Python dependencies. Afterwards, run `source ~/.local/bin/env` once (or open a new terminal) so that later jobs find `uv`. For more information on UV, please read the [UV docs](https://docs.astral.sh/uv/) | `sbatch scripts/02_setup_uv.sh`        |
 | `03_gpu_basic`       | Verify GPU allocation with `nvidia-smi`                                                                               | `sbatch scripts/03_gpu_basic.sh`       |
 | `04_data_setup`      | Download datasets to shared project storage                                                                           | `sbatch scripts/04_data_setup.sh`      |
 | `05_python_training` | Train a simple CNN on MNIST (single GPU)                                                                              | `sbatch scripts/05_python_training.sh` |
@@ -96,7 +96,9 @@ The `scripts/` directory contains a progressive series of SLURM batch scripts (`
 | `07_single_gpu`      | Train ResNet-18 on CIFAR-100 (single GPU)                                                                             | `sbatch scripts/07_single_gpu.sh`      |
 | `08_multi_gpu`       | Train ResNet-18 on CIFAR-100 (4 GPUs with Accelerate)                                                                 | `sbatch scripts/08_multi_gpu.sh`       |
 
-Scripts `05`-`06` use MNIST with a small CNN for fast iteration. Scripts `07`-`08` switch to CIFAR-100 with ResNet-18 — a larger model and dataset that makes the multi-GPU speedup clearly visible.
+Scripts `05`-`06` use MNIST with a small CNN for fast iteration. Scripts `07`-`08` switch to CIFAR-100 with ResNet-18 — a larger model and dataset that makes the multi-GPU speedup clearly visible. To compare `07` and `08`, look at the time per epoch in the logs; `08` uses a 4x larger total batch, so its accuracy is not directly comparable.
+
+The [`example_logs/`](example_logs/) folder contains the logs of a complete run of all scripts (7 October 2026), so you can compare your own logs with a known-good run. `07` took about 35 s per epoch on one GPU and `08` about 12.5 s on four GPUs. More GPUs train faster, but they are also harder to get: in the same evening, a 1-GPU job started after 5 seconds, while a 4-GPU job waited 1 hour 37 minutes in the queue and then ran for under 2 minutes.
 
 ## 3. Storage on the Cluster
 

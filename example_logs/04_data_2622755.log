@@ -1,0 +1,16 @@
+========================================
+SLURM Job ID: 2622755
+Running on node: gx17v1
+Start time: Wed Oct  7 10:49:47 PM CEST 2026
+========================================
+
+Datasets already present in shared storage: /sc/projects/sci-aisc/workshop-slurm/data
+Skipping download.
+
+Created symlink: ./data -> /sc/projects/sci-aisc/workshop-slurm/data
+
+========================================
+Job finished!
+End time: Wed Oct  7 10:49:47 PM CEST 2026
+Runtime: 0s
+========================================

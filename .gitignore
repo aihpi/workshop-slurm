@@ -208,3 +208,6 @@ cython_debug/
 
 # Talking points during the workshop
 .info-material
+
+# Example logs are committed on purpose
+!example_logs/*.log

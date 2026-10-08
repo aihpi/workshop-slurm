@@ -1,0 +1,22 @@
+========================================
+SLURM Job ID: 2622761
+Running on node: gx08
+Start time: Wed Oct  7 10:50:47 PM CEST 2026
+========================================
+
+Array Job ID: 2622757
+Array Task ID: 1
+Task 1: lr=0.01, batch_size=32
+Using device: cuda
+MNIST mean: 0.1307, std: 0.3081
+Epoch 1/3 - Loss: 0.4081, Acc: 87.61%
+Epoch 2/3 - Loss: 0.1092, Acc: 96.69%
+Epoch 3/3 - Loss: 0.0754, Acc: 97.72%
+
+Task 1 | lr=0.01, bs=32 | Test Acc: 97.84%
+
+========================================
+Job finished!
+End time: Wed Oct  7 10:51:19 PM CEST 2026
+Runtime: 32s
+========================================

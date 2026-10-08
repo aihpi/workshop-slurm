@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=setup_uv
 #SBATCH --account=aisc
-#SBATCH --partition=aisc-batch
-#SBATCH --time=00:10:00
+#SBATCH --partition=pot-hpi-aisc-batch
+#SBATCH --time=00:30:00  # a first install downloads several GB; took 6 min for one user on an idle cluster
 #SBATCH --mem=4G
 #SBATCH --constraint=ARCH:X86 # Only use x86 nodes, see https://docs.sc.hpi.de/cluster/Resources/Features/
 #SBATCH --output=logs/02_setup_uv_%j.log
@@ -64,6 +64,15 @@ uv sync
 echo ""
 echo "Testing imports..."
 uv run python scripts/02_setup_uv.py
+
+# The uv installer added ~/.local/bin to your PATH, but only for shells started
+# from now on. Jobs inherit the PATH of the terminal you submit them from, so a
+# terminal that was already open needs to load it once before submitting 03.
+echo ""
+echo "IMPORTANT: before submitting 03, run this once in your terminal"
+echo "(or open a new terminal):"
+echo ""
+echo "    source ~/.local/bin/env"
 
 
 echo ""

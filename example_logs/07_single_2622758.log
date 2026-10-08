@@ -1,0 +1,21 @@
+========================================
+SLURM Job ID: 2622758
+Running on node: gx08
+Start time: Wed Oct  7 10:49:47 PM CEST 2026
+========================================
+
+Using device: cuda
+CIFAR-100 mean: tensor([0.5071, 0.4866, 0.4409]), std: tensor([0.2673, 0.2564, 0.2762])
+Epoch 1/5 - Loss: 4.2478, Acc: 6.47%, Time: 37.1s
+Epoch 2/5 - Loss: 3.8697, Acc: 11.76%, Time: 35.4s
+Epoch 3/5 - Loss: 3.6598, Acc: 14.51%, Time: 35.6s
+Epoch 4/5 - Loss: 3.5020, Acc: 17.10%, Time: 35.6s
+Epoch 5/5 - Loss: 3.3696, Acc: 19.37%, Time: 33.8s
+
+Test Accuracy: 17.81%
+
+========================================
+Job finished!
+End time: Wed Oct  7 10:53:19 PM CEST 2026
+Runtime: 212s
+========================================

@@ -1,0 +1,23 @@
+========================================
+SLURM Job ID: 2622759
+Running on node: gx08
+GPUs allocated: 4
+Start time: Thu Oct  8 12:26:50 AM CEST 2026
+========================================
+
+Number of GPUs: 4
+Current GPU: cuda:0
+CIFAR-100 mean: tensor([0.5071, 0.4866, 0.4409]), std: tensor([0.2673, 0.2564, 0.2762])
+Epoch 1/5 - Loss: 4.4827, Acc: 3.74%, Time: 12.6s
+Epoch 2/5 - Loss: 4.2489, Acc: 7.21%, Time: 13.3s
+Epoch 3/5 - Loss: 4.1108, Acc: 9.38%, Time: 12.6s
+Epoch 4/5 - Loss: 3.9882, Acc: 10.69%, Time: 12.5s
+Epoch 5/5 - Loss: 3.9152, Acc: 11.96%, Time: 12.8s
+
+Test Accuracy: 11.75%
+
+========================================
+Job finished!
+End time: Thu Oct  8 12:28:31 AM CEST 2026
+Runtime: 101s
+========================================

@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=hello_world
 #SBATCH --account=aisc
-#SBATCH --partition=aisc-batch
+#SBATCH --partition=pot-hpi-aisc-batch
 #SBATCH --time=00:01:00
 #SBATCH --mem=1G
 #SBATCH --constraint=ARCH:X86 # Only use x86 nodes, see https://docs.sc.hpi.de/cluster/Resources/Features/
