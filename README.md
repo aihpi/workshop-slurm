@@ -20,8 +20,8 @@ For those not attending a workshop, we recommend reviewing the accompanying [pre
 | **I**  | Slides: partitions, nodes, SLURM, Interactive vs. Batch | 10 min    |
 | **I**  | Interactive: VSCode Installation                        | 5 min     |
 |        | _Break_                                                 |           |
-| **II** | Interactive SLURM workflow                              | 10-20 min |
-| **II** | Slides: Basics of CPUs/GPUs and fairshare               | 10-20 min |
+| **II** | Interactive SLURM workflow and fairshare                | 10-20 min |
+| **II** | Slides: Basics of CPUs/GPUs                             | 10-20 min |
 | **II** | Interactive: Cloning of repository                      | 5 min     |
 | **II** | Interactive: Batch scripts (`01`-`08`)                  | 20 min    |
 | **II** | Conclusion and Feedback                                 | 5 min     |

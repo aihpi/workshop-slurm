@@ -21,8 +21,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Partition `aisc-batch` renamed to `pot-hpi-aisc-batch` in all scripts and the README (the old names no longer exist)
 - `02_setup_uv` time limit raised from 10 to 30 min (a first install took 6 min for one user)
 - `08_multi_gpu` requests 16 CPUs (4 per GPU, as in `07`) instead of 8
-- Slides use the partition names `pot-hpi-aisc-*` (slides 13, 31, 32), the current compute node names (slides 11, 31) and `--gpus` instead of `--gres=gpu` (slide 25), as the scripts do
+- Slides use the partition names `pot-hpi-aisc-*` (slides 13, 21, 32), the current compute node names (slides 11, 32) and `--gpus` instead of `--gres=gpu` (slide 26), as the scripts do
 - `slides/workshop-slurm.pdf` and `.pptx` re-exported from the Keynote file, so all three formats match
+- Fairshare slide moved from the end of Part II to right after the Interactive SLURM part (now slide 21), where it is shown live
 
 ### Fixed
 - Changed `data/` to `data` in `.gitignore` to also match the symlink
