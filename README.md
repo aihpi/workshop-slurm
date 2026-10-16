@@ -85,6 +85,15 @@ When you log in via `ssh firstname.lastname@hpc.sci.hpi.de` you are connected wi
 
 The `scripts/` directory contains a progressive series of SLURM batch scripts (`.sh`) and their corresponding Python scripts (`.py`). Each builds on the concepts from the previous one.
 
+> **_In a workshop:_**
+> We usually reserve GPUs for the participants, and the presenters tell you the name of the reservation (for example `aisc-workshop`). Run this once in your terminal before submitting the first script:
+>
+> ```bash
+> export SBATCH_RESERVATION=aisc-workshop
+> ```
+>
+> From then on, `sbatch` sends every job from this terminal to the reserved node, so the scripts stay unchanged. A new terminal needs the command again. The reservation only exists during the workshop; afterwards, run `unset SBATCH_RESERVATION` or open a new terminal, otherwise your jobs are rejected.
+
 | Script               | Topic                                                                                                                 | Command                                |
 | -------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
 | `01_hello_world`     | Basic SLURM job submission and logging                                                                                | `sbatch scripts/01_hello_world.sh`     |
